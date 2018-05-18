@@ -43,23 +43,13 @@ static int parse(const CliOpts & opts) {
 	}
 	else
 	{
-		typedef std::shared_ptr<Box> boxptr_t;
-		typedef std::vector<boxptr_t> boxlist_t;
-		boxlist_t boxes;
+		Boxes boxes(mf.baseptr(), 0, mf.size());
 		Json::Value arr(Json::arrayValue);
+		for(size_t i = 0, n = boxes.count(); i < n; ++i) {
+			arr.append(boxes[i]->json());
+		}
 		std::unique_ptr<std::ofstream> osf;
 		std::ostream * os = nullptr;
-
-		for (size_t ofs = 0; ofs < mf.size();) {
-			std::shared_ptr<Box> box(Box::createBox(mf.baseptr(), ofs));
-			boxes.push_back(box);
-			ofs += box->size();
-		}
-		for (boxlist_t::const_iterator it = boxes.begin(); it != boxes.end(); ++it) {
-			Box const * box = (*it).get();
-			Json::Value val = box->json();
-			arr.append(val);
-		}
 		if (strcmp(opts.outfile(), "stdout") == 0) {
 			os = &std::cout;
 		}

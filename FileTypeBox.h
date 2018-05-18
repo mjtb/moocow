@@ -4,7 +4,7 @@
 #include <vector>
 #include "Box.h"
 
-class FileTypeBox : public virtual Box {
+class FileTypeBox : public Box {
 public:
 	FileTypeBox(const void * p, size_t ofs) : Box(p, ofs) {}
 	virtual ~FileTypeBox() {}

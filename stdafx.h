@@ -11,6 +11,10 @@
 #define NOMINMAX
 #endif
 
+#ifndef _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
 #include "targetver.h"
 
 #include <Windows.h>
