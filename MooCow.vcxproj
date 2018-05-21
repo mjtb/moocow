@@ -149,13 +149,17 @@
     <ClInclude Include="getopt.h" />
     <ClInclude Include="json-forwards.h" />
     <ClInclude Include="json.h" />
+    <ClInclude Include="MediaBox.h" />
+    <ClInclude Include="MediaInformationBox.h" />
     <ClInclude Include="MemoryMappedFile.h" />
     <ClInclude Include="MemoryMappedFile_Linux.h" />
     <ClInclude Include="MemoryMappedFile_Win32.h" />
     <ClInclude Include="MooCow.h" />
     <ClInclude Include="MovieBox.h" />
+    <ClInclude Include="SampleTableBox.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TrackBox.h" />
     <ClInclude Include="UserDataBox.h" />
     <ClInclude Include="Utf.h" />
   </ItemGroup>
