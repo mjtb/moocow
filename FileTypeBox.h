@@ -7,7 +7,6 @@
 class FileTypeBox : public Box {
 public:
 	FileTypeBox(const void * p, size_t ofs) : Box(p, ofs) {}
-	virtual ~FileTypeBox() {}
 	uint32_t major_brand() const {
 		return big32(*reinterpret_cast<const uint32_t *>(dataptr(0)));
 	}

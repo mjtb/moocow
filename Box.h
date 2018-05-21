@@ -17,6 +17,8 @@ typedef uuid_le uuid_t;
 
 #include "json.h"
 
+#include "Utf.h"
+
 class Boxes;
 
 class Box {
@@ -87,11 +89,24 @@ public:
 		uint32_t bef = rebig32(f);
 		char x[5] = { 0 };
 		memmove(x, &bef, 4);
-		return std::string(x);
+		if (x[0] < 0 || x[1] < 0 || x[2] < 0 || x[3] < 0) {
+			return Utf::utf8(x, 4);
+		}
+		else {
+			return std::string(x);
+		}
 	}
 	static uint32_t fourcc(const char * x) {
+		char bx[4] = { 0 };
+		if (x[0] < 0 || x[1] < 0 || x[2] < 0 || x[3] < 0) {
+			std::string y = Utf::latin1(x);
+			strncpy(bx, y.c_str(), 4);
+		}
+		else {
+			strncpy(bx, x, 4);
+		}
 		uint32_t y = 0;
-		memmove(&y, x, 4);
+		memmove(&y, bx, 4);
 		return big32(y);
 	}
 	static uint32_t fourcc(const std::string & x) {
@@ -177,6 +192,37 @@ public:
 	Json::Value json() const {
 		Json::Value obj(Json::objectValue);
 		json(obj);
+		if (obj.size() == 2) {
+			const size_t max_fmt_bytes = 128;
+			const size_t fmt_buf_chars = max_fmt_bytes * 2 + 3 /* U+2026 in UTF-8 */ + 1;
+			std::unique_ptr<char[]> fmt(new char[fmt_buf_chars]);
+			memset(fmt.get(), 0, fmt_buf_chars);
+			size_t s = data_length();
+			bool binary = false;
+			const uint8_t * p = reinterpret_cast<const uint8_t *>(dataptr());
+			for (size_t i = 0; i < s && i < max_fmt_bytes; ++i) {
+				if(p[i] < ' ' || p[i] > '~') {
+					binary = true;
+					break;
+				}
+			}
+			char * q = fmt.get();
+			if (binary) {
+				for (size_t i = 0, j = 0; i < s && i < max_fmt_bytes; ++i, j += 2) {
+					int hi = (p[i] >> 4) & 15, lo = (p[i] & 15);
+					q[j] = static_cast<char>((hi > 9) ? (hi - 10 + 'a') : ('0' + hi));
+					q[j + 1] = static_cast<char>((lo > 9) ? (lo - 10 + 'a') : ('0' + lo));
+				}
+			}
+			else
+			{
+				memmove(q, p, std::min(s, max_fmt_bytes));
+			}
+			if (s > max_fmt_bytes) {
+				strcat(q, "\xE2\x80\xA6");
+			}
+			obj["data"] = fmt.get();
+		}
 		return obj;
 	}
 };
