@@ -107,6 +107,7 @@ public:
 		return big32(*reinterpret_cast<const uint32_t *>(dataptr(((version() == 1) ? 44 : 32) + 9 * 4 + 6 * 4)));
 	}
 	virtual void json(Json::Value & obj) const {
+		FullBox::json(obj);
 		obj["creation_time"] = date(creation_time());
 		obj["modification_time"] = date(modification_time());
 		obj["timescale"] = timescale();

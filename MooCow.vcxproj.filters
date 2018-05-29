@@ -72,6 +72,12 @@
     <ClInclude Include="SampleTableBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MetaBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HandlerBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

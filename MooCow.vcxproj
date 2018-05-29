@@ -147,6 +147,7 @@
     <ClInclude Include="CliOpts.h" />
     <ClInclude Include="FileTypeBox.h" />
     <ClInclude Include="getopt.h" />
+    <ClInclude Include="HandlerBox.h" />
     <ClInclude Include="json-forwards.h" />
     <ClInclude Include="json.h" />
     <ClInclude Include="MediaBox.h" />
@@ -154,6 +155,7 @@
     <ClInclude Include="MemoryMappedFile.h" />
     <ClInclude Include="MemoryMappedFile_Linux.h" />
     <ClInclude Include="MemoryMappedFile_Win32.h" />
+    <ClInclude Include="MetaBox.h" />
     <ClInclude Include="MooCow.h" />
     <ClInclude Include="MovieBox.h" />
     <ClInclude Include="SampleTableBox.h" />

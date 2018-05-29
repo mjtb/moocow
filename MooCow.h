@@ -10,6 +10,8 @@
 #include "MediaBox.h"
 #include "MediaInformationBox.h"
 #include "SampleTableBox.h"
+#include "MetaBox.h"
+#include "HandlerBox.h"
 
 #ifdef MOOCOW_H_STATIC_DEFINES
 
@@ -23,6 +25,12 @@ static BoxTypeRegistration<TrackBox> TrackBoxRegistration("trak");
 static BoxTypeRegistration<MediaBox> MediaBoxRegistration("mdia");
 static BoxTypeRegistration<MediaInformationBox> MediaInformationBoxRegistration("minf");
 static BoxTypeRegistration<SampleTableBox> SampleTableBoxRegistration("stbl");
+static BoxTypeRegistration<BitRateBox> BitRateBoxRegistration("btrt");
+static BoxTypeRegistration<SampleDescriptionBox> SampleDescriptionBoxRegistration("stsd");
+static BoxTypeRegistration<TimeToSampleBox> TimeToSampleBoxRegistration("stts");
+static BoxTypeRegistration<MetaBox> MetaBoxRegistration("meta");
+static BoxTypeRegistration<HandlerBox> HandlerBoxRegistration("hdlr");
+
 
 #endif
 

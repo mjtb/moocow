@@ -242,6 +242,11 @@ public:
 		uint32_t n = big32(*reinterpret_cast<const uint32_t *>(dataptr()));
 		return n & 0xFFFFFF;
 	}
+	void json(Json::Value &obj) const {
+		Box::json(obj);
+		obj["version"] = version();
+		obj["flags"] = flags();
+	}
 };
 
 class Boxes {
